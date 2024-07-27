@@ -2,11 +2,13 @@ import foodModel from "../models/foodModel.js";
 import fs from "fs";
 
 // add food item
-
 const addFood = async (req, res) => {
-    const { name, description, price, image, category } = req.body;
+    
+    let image = `${req.file.filename}`;
+    
+    const { name, description, price, category } = req.body;
 
-    const newFoodItem = new foodModel({
+    const food = new foodModel({
         name,
         description,
         price,
@@ -15,10 +17,11 @@ const addFood = async (req, res) => {
     });
 
     try {
-        await newFoodItem.save();
-        res.status(201).json(newFoodItem);
+        await food.save();
+        res.status(201).json({success: true, message:"Food Added"});
     } catch (error) {
-        res.status(409).json({ message: error.message });
+        console.log(error);
+        res.status(409).json({success: false, message: error.message });
     }
 };
 
