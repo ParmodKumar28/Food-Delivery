@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { connect } from 'mongoose';
 import { connectDB } from './config/db.js';
+import foodRouter from './routes/foodRoute.js';
 
 
 
@@ -15,6 +16,9 @@ app.use(cors());
 
 // db connection
 connectDB();
+
+//api endpoints
+app.use('/api/food', foodRouter);
 
 // api routes
 app.get('/', (req, res) => res.status(200).send('API Working'));
