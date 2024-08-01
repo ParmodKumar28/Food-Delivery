@@ -3,6 +3,7 @@ import "./LoginPopup.css"
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 const LoginPopup = ({ setShowLogin }) => {
 
@@ -21,13 +22,8 @@ const LoginPopup = ({ setShowLogin }) => {
         setData(data => ({ ...data, [name]: value }));
     }
 
-    useEffect(() => {   
-        console.log(data);
-    }, [data]);
-
     const onLogin = async (event) => {
         event.preventDefault();
-        console.log("url", url);
         let newUrl = url;
         if(currState === "Login") {
             newUrl += `/api/user/login`;
@@ -41,8 +37,11 @@ const LoginPopup = ({ setShowLogin }) => {
             setToken(response.data.token);
             localStorage.setItem("token", response.data.token);
             setShowLogin(false);
+            toast.success(response.data.message);
+            console.log(response.data.message);
         } else {
-            alert(response.data.message);
+            toast.error(response.data.message);
+            console.log(response.data.message);
         }
     }
 

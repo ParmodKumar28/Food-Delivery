@@ -8,36 +8,38 @@ const MyOrders = () => {
 
     const { url, token } = useContext(StoreContext);
     const [data, setData] = useState([
-        {
-            items: [
-                { name: 'Pizza', quantity: 2 },
-                { name: 'Burger', quantity: 1 }
-            ],
-            amount: 30,
-            status: 'Delivered'
-        },
-        {
-            items: [
-                { name: 'Sushi', quantity: 3 },
-                { name: 'Ramen', quantity: 2 }
-            ],
-            amount: 50,
-            status: 'In Progress'
-        }
+        // {
+        //     items: [
+        //         { name: 'Pizza', quantity: 2 },
+        //         { name: 'Burger', quantity: 1 }
+        //     ],
+        //     amount: 30,
+        //     status: 'Delivered'
+        // },
+        // {
+        //     items: [
+        //         { name: 'Sushi', quantity: 3 },
+        //         { name: 'Ramen', quantity: 2 }
+        //     ],
+        //     amount: 50,
+        //     status: 'In Progress'
+        // }
     ]);
 
     const fetchOrders = async () => {
         try {
             const response = await axios.post(`${url}/api/order/userorders`, {}, { headers: { token } });
-            setData(response.data.data);
-            console.log(data);
+            console.log("Response data:", response.data.orders);
+            setData(response.data.orders);
         } catch (error) {
             console.error("Error fetching orders:", error);
         }
     }
 
     useEffect(() => {
-        // fetchOrders();
+        if(token){
+            fetchOrders();
+        }
     }, [token]);
 
     return (

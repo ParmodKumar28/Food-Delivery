@@ -22,7 +22,7 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ success: false, message: "Invalid credentials" });
         }
         const token = createToken(user._id);
-        res.status(200).json({ success: true, token });
+        res.status(200).json({ success: true, token, message: "User logged in" });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: error.message });
@@ -30,7 +30,7 @@ const loginUser = async (req, res) => {
 };
 
 const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
 // register user

@@ -33,7 +33,7 @@
 }
 
 .add-btn{
-    min-width: 120px;
+    width: 120px;
     border: none;
     padding: 10px;
     background-color: black;

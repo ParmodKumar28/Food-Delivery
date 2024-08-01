@@ -64,7 +64,7 @@ const Add = ({url}) => {
 
                 <div className="add-product-description">
                     <p>Product description</p>
-                    <textarea onChange={onChangeHandler} value={data.description} name="description" rows="6" placeholder='Write content here' ></textarea>
+                    <textarea onChange={onChangeHandler} value={data.description} name="description" rows="6" cols="80" placeholder='Write content here' ></textarea>
                 </div>
 
                 <div className="add-category-price">
